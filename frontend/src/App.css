@@ -1,9 +1,32 @@
-.front {
-    height: 600px;
+.top {
+  padding-top: 100px;
 }
-.best {
-    padding-top: 80px;
+.img1 {
+  width: 100%;
 }
-.first {
-     
+.text {
+  padding-top: 10%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+.no-line {
+  text-decoration: none;
+}
+.best,
+.blog,
+.detail {
+  padding-top: 100px;
+}
+
+@media (min-width: 1200px) {
+.car, .paragraph {margin-left: 10%; margin-right: 10%;}
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: auto;
+  }
 }
