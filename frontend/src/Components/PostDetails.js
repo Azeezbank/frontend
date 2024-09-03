@@ -6,7 +6,7 @@ function PostDetail() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`)
+    fetch(`https://backend-i9tl.onrender.com/api/posts/${id}`)
       .then(response => response.json())
       .then((data) => setPost(data) )
       .catch(error => console.error('Error fetching post:', error));
@@ -20,7 +20,7 @@ function PostDetail() {
     <>
       <h1>{post.content}</h1>
       <p>{post.content}</p>
-      <small>By {post.author}</small>
+      <small>By {post.author_name}</small>
     </>
   );
 }
