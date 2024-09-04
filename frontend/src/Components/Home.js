@@ -88,10 +88,11 @@ const Home = () => {
       </div>
 
       <div className="container-fluid bg-light p-5 text-center">
+        <div className="car">
         <h3>Recognized by</h3>
         <div className="row mt-5 text-start">
           <div className="col-6">
-            <div className="row">
+            <div className="row ">
               <div className="col-2">
                 <h4>
                   <i className="bi bi-star-fill text-danger"></i>
@@ -183,9 +184,11 @@ const Home = () => {
             </p>
           </div>
         </div>
+        </div>
       </div>
 
       <div className="container-fluid bg-white p-5 text-center">
+        <div className="car">
         <div className="row mt-5 mb-3">
           <div className="col-sm-4">
             <h2>
@@ -258,9 +261,11 @@ const Home = () => {
             </p>
           </div>
         </div>
+        </div>
       </div>
 
       <div className="container-fluid bg-light p-5 text-center">
+        <div className="car">
         <div className="row mt-5 mb-3">
           <div className="col-sm-4 text-start ms-4 mb-3">
             <h1>
@@ -328,6 +333,7 @@ const Home = () => {
           <h2 className="btn bg-danger shadow-lg pt-3 pb-3 rounded text-white">
             <i className="bi bi-telephone"></i> Contact Us Today
           </h2>
+        </div>
         </div>
       </div>
 

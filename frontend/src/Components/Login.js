@@ -1,67 +1,52 @@
 import React, { useState } from 'react';
 
-function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const Login = () => {
+    const [userId, setUserId] = useState('');
     const [posts, setPosts] = useState([]);
+    const [error, setError] = useState(null);
 
-    const handleLogin = () => {
-        fetch('https://backend-i9tl.onrender.com/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => {
+    const fetchPosts = async () => {
+        if (!userId) return;
+        
+        try {
+            const response = await fetch(`https://backend-i9tl.onrender.com/api/postss/${userId}`);
             if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.message); });
+                throw new Error('Failed to fetch posts');
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === 'Login successful!') {
-                loadUserPosts();
-            } else {
-                alert('Login failed: ' + data.message);
-            }
-        })
-        .catch(error => {
-            alert('Error: ' + error.message);
-        });
+            const data = await response.json();
+            setPosts(data);
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
-    const loadUserPosts = () => {
-        fetch('https://backend-i9tl.onrender.com/user-posts')
-        .then(response => response.json())
-        .then(posts => {
-            setPosts(posts);
-        });
+    const handleUserIdChange = (e) => {
+        setUserId(e.target.value);
     };
 
     return (
-        <div className="App">
-            <h1>Login</h1>
+        <div>
+            <h1>User Posts</h1>
             <input
                 type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter User ID"
+                value={userId}
+                onChange={handleUserIdChange}
             />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleLogin}>Login</button>
-
-            <h2>Your Posts</h2>
-            <ul>
-                {posts.map(post => (
-                    <li key={post.id}>{post.title}</li>
-                ))}
-            </ul>
+            <button onClick={fetchPosts}>Get Posts</button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {posts.length > 0 ? (
+                posts.map(post => (
+                    <div key={post.id}>
+                        <h2>{post.title}</h2>
+                        <p>{post.content}</p>
+                    </div>
+                ))
+            ) : (
+                <p>No posts found for this user.</p>
+            )}
         </div>
     );
-}
+};
 
 export default Login;

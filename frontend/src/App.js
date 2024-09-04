@@ -6,7 +6,7 @@ import Home from "./Components/Home";
 import AllPost from "./Components/AllPost";
 import PostDetails from "./Components/PostDetails";
 import Login from "./Components/Login";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Routes, useParams } from 'react-router-dom';
 
 function App() {
@@ -24,12 +24,12 @@ function App() {
                 <Register />
                 <h2>Create post</h2>
                 <Createpost />
-                <Login />
               </>
             }
           />
           <Route path="/AllPost" element={<AllPost />} />
           <Route path="/PostDetail/:id" element={<PostDetails />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

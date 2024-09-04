@@ -23,6 +23,7 @@
 
 @media (min-width: 1200px) {
 .car, .paragraph {margin-left: 10%; margin-right: 10%;}
+.carr {padding-left: 10%; padding-right: 10%;}
 }
 
 @media (max-width: 760px) {
