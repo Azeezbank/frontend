@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 
 function AllPost() {
   const [posts, setPosts] = useState([]);
+
+const [searchTerm, setSearchTerm] = useState("");
+
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
+  const [wishlist, setWishlist] = useState([]); 
+  
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -10,6 +17,7 @@ function AllPost() {
       .then((response) => response.json())
       .then((data) => {
         setPosts(data);
+        setFilteredPosts(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -18,17 +26,61 @@ function AllPost() {
       });
   }, []);
 
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() === '') {
+      setFilteredPosts(posts);
+    } else {
+      const filtered = posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      setFilteredPosts(filtered);
+    }
+  };
+
+
+
+ // Retrieve the wishlist from localStorage when the component mounts
+  useEffect(() => {
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist)); // Load wishlist from localStorage if available
+    }
+  }, []); // Load wishlist from localStorage if available
+
+  // Save the wishlist to localStorage whenever it changes
+  useEffect(() => {
+    if (wishlist.length > 0) {
+      localStorage.setItem('wishlist', JSON.stringify(wishlist)); // Save wishlist to localStorage
+    }
+  }, [wishlist]);
+
+  // Function to toggle wishlist (add or remove a post from wishlist)
+  const toggleWishlist = (post) => {
+    if (wishlist.includes(post)) {
+      setWishlist(wishlist.filter((item) => item.id !== post.id)); // Remove from wishlist
+    } else {
+      setWishlist([...wishlist, post]); // Add to wishlist
+    }
+  };
+
+  // Function to check if a post is wishlisted
+  const isWishlisted = (post) => {
+    return wishlist.some((item) => item.id === post.id);
+  };
+  
+  
+
   return (
     <>
       <nav className="navbar navbar-expand-md bg-danger bg-gradient fixed-top">
         <div className="container-fluid">
-          <a
+          <span
             href="#"
             className="navbar-brand"
             style={{ fontSize: "2.2rem", fontWeight: "bold" }}
           >
             Bankky <small>Blog.</small>
-          </a>
+          </span>
           <button
             className="navbar-toggler bg-light bg-gradient"
             type=" button"
@@ -40,36 +92,50 @@ function AllPost() {
           <div className="collapse navbar-collapse" id="navContent">
             <ul className="navbar-nav">
               <hr />
+              <Link to="/" className="link">
               <li className="nav-item">
-                <a href="." className="nav-link">
+                <span href="." className="nav-link">
                   HOME
-                </a>
+                </span>
               </li>
+            </Link>
+              <Link to='/' className="link">
               <li className="nav-item">
-                <a className="nav-link" href="#about">
-                  ABOUT ME
-                </a>
+                <span className="nav-link">
+                  <span>ABOUT Us</span>
+                </span>
               </li>
-              <Link to="/AllPost">
+                </Link>
+              <Link to="/AllPost" className="link">
                 <li className="nav-item">
-                  <a className="nav-link" href="#edu">
+                  <span className="nav-link">
                     BLOG
-                  </a>
+                  </span>
                 </li>{" "}
               </Link>
+              <Link to='/' className="link">
               <li className="nav-item">
-                <a className="nav-link" href="#service">
-                  SERVICE
-                </a>
+                <span className="nav-link">
+                 <span> SERVICE </span>
+                </span>
               </li>
+                </Link>
+              <Link to="/Login" className="link">
+              <li className="nav-item">
+              <span className="nav-link" href="">
+              My Account
+              </span>
+              </li>
+              </Link>
 
-              <button className="btn bg-primary bg-gradient text-light btn- rounded-pill">
+              <button className="btn bg-light text-dark btn- rounded-pill">
                 LET'S TALK
               </button>
             </ul>
           </div>
         </div>
       </nav>
+      
 
       <div className="container-fluid bg-light">
         <div className="row blog">
@@ -96,7 +162,7 @@ function AllPost() {
                 </>
               ) : (
                 <ul className="p-3 grid">
-                  {posts.map((post) => (
+                  {filteredPosts.map((post) => (
                     <li
                       key={post.id}
                       className="card bg-white text-dark border rounded shadow-sm p-3"
@@ -104,7 +170,7 @@ function AllPost() {
                     >
                       <img
                         className="thumbnail"
-                        src="https://tunstelecom.com.ng/wp-content/uploads/2024/08/images-15.jpeg"
+                        src="https://skytechgeek.com/wp-content/uploads/2019/03/become-food-blogger.jpg"
                         alt="img"
                       />
                       <h3 className="pt-4">{post.title}</h3>
@@ -121,32 +187,75 @@ function AllPost() {
                           <i className="bi  bi-chevron-double-right"></i>{" "}
                         </p>{" "}
                       </Link>
+
+
+
+                      <button className='bg-danger text-white ms-5 me-5 border rounded' onClick={() => toggleWishlist(post)}>
+              {isWishlisted(post) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            </button>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
+
+            {/* Display the wishlist section */}
+            <h2 className='text-danger ms-5 mt-5'>Whishlist</h2>
+      <ul className='grid'>
+        {wishlist.map((post) => (
+          <li key={post.id} className="card bg-white text-dark border rounded shadow-sm p-3"
+                      style={{ listStyle: "none" }}>
+            <img
+                        className="thumbnail"
+                        src="https://skytechgeek.com/wp-content/uploads/2019/03/become-food-blogger.jpg"
+                        alt="img"
+                      />
+
+            <h3 className="pt-4">{post.title}</h3>
+            <small>
+                        {" "}
+                        <i className="bi bi-person-fill bg-light text-danger p-2 rounded-circle"></i>
+                        By {post.author_name} <br /> {post.created_at}
+                      </small>
+            <p className="pt-3">{post.content.substring(0, 5)}...</p>
+            <br />
+                      <Link to={`/PostDetail/${post.id}`} className="no-line">
+                        <p className="text-danger">
+                          Read more{" "}
+                          <i className="bi  bi-chevron-double-right"></i>{" "}
+                        </p>{" "}
+                      </Link>
+            {/* Button to remove from wishlist */}
+            <button className='bg-danger text-white ms-5 me-5 border rounded' onClick={() => toggleWishlist(post)}>
+              Remove from Wishlist
+            </button>
+          </li>
+        ))}
+      </ul>
+            
           </div>
 
           <div className="col-sm-4">
             <form className="form input-group bg-white mt-5 me-1">
               <input
                 type="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search Post..."
                 className="form-control bg-light mt-5 mb-5 ms-3"
               />
-              <button className="btn btn-outline-danger mt-5 mb-5 me-3">
+              <button onClick={handleSearch} className="btn btn-outline-danger mt-5 mb-5 me-3">
                 <i className="bi bi-search"></i>
               </button>
             </form>
-          
 
-          <div className="bg-white mt-4">
+
+          <div className="bg-white mt-4 mb-4">
             <h3 className="pt-5 ms-4">CATEGORIES</h3>
             <p className="text-danger pt-3 ms-3">Recipes & Cooking Tips</p>
             <p className="text-danger pt-3 ms-3">Restaurant Reviews</p>
             <p className="text-danger pt-3 ms-3">Healthy Eating</p>
-            <p className="text-danger pt-3 ms-3">Food Trends & News</p>
+            <p className="text-danger pt-3 ms-3 pb-4">Food Trends & News</p>
           </div>
         </div>
         </div>

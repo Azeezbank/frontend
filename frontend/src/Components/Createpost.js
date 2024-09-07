@@ -2,28 +2,30 @@ import React, { useState } from "react";
 
 const Createpost = () => {
   const [title, setTitle] = useState("");
-  const [author_name, setAuthor] = useState("");
+  const [author_name, setAuthor_name] = useState("");
+  const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
-  const [user_id, setUserid] = useState("");
+  const [user_id, setUser_id] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/posts", {
+      const response = await fetch("https://backend-i9tl.onrender.com/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, author_name, content, user_id }),
+        body: JSON.stringify({ title, author_name, email, content, user_id }),
       });
 
       if (response.ok) {
         // Clear the form fields after successful submission
         setTitle("");
-        setAuthor("");
+        setAuthor_name("");
+        setEmail("");
         setContent("");
-        setUserid("");
+        setUser_id("");
         alert("Post successfull");
       } else {
         // Optionally handle non-OK responses here
@@ -37,39 +39,68 @@ const Createpost = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className='bg-white p-3 border text-start' onSubmit={handleSubmit}>
+        <label htmlFor='title' className='form-label'> Title:*</label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="title"
+          placeholder="Post Title"
+          name='title'
+          className='form-control bg-light mb-3'
           required
         />
 
+        <label htmlFor='author' className='form-label'>Author:*</label>
         <input
           type="text"
           value={author_name}
-          onChange={(e) => setAuthor(e.target.value)}
-          placeholder="author"
+          onChange={(e) => setAuthor_name(e.target.value)}
+          placeholder="Post Author name"
+          className='form-control mb-3 bg-light'
+          name='author'
           required
         />
 
+        <label htmlFor='email' className="form-label">Email:*</label>
+        <input type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Author mail"
+          className="form-control mb-3 bg-light"
+          name="email"
+          required
+          />
+
+        <label htmlFor='content' className='form-label'>Content:*</label>
         <input
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="description"
+          placeholder="Post Description"
+          className='form-control bg-light mb-3'
+          name='content'
           required
         />
 
+        <label htmlFor='userid' className='form-label'>User_id:*</label>
         <input
-          type="number"
+          type="password"
           value={user_id}
-          onChange={(e) => setUserid(e.target.value)}
-          placeholder="User_id"
+          onChange={(e) => setUser_id(e.target.value)}
+          placeholder="Unique & Secret Number"
+          name='userid'
+          className='form-control bg-light mb-3'
+          required
         />
 
-        <button type="submit">Create</button>
+        <div className='form-check'>
+        <label htmlFor='check' className='form-check-label mb-3'>
+        <input type='checkbox' className='form-check-input bg-light' />
+          Remember Me</label>
+        </div>
+
+        <button className='mt-3 btn btn-danger' type="submit">Create</button>
       </form>
     </>
   );

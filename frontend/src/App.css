@@ -20,6 +20,25 @@
 .detail {
   padding-top: 100px;
 }
+.account {
+   height:400px; background-color: red; opacity: 0.5; margin-left: -12px; margin-right: -12px
+}
+.my {
+  padding-top:200px; opacity: 10
+}
+.userimg {
+  width: 60%
+}
+.myPost {
+  display: grid; grid-template-columns: 50% 50%; gap: 10px
+}
+.thumb {
+  width: 100%
+}
+.link {
+  text-decoration: none; color: black
+}
+
 
 @media (min-width: 1200px) {
 .car, .paragraph {margin-left: 10%; margin-right: 10%;}

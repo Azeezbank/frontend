@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
-import Register from "./Components/Register";
-import Createpost from "./Components/Createpost";
 import Home from "./Components/Home";
 import AllPost from "./Components/AllPost";
 import PostDetails from "./Components/PostDetails";
 import Login from "./Components/Login";
+import Editpost from "./Components/Editpost";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Routes, useParams } from 'react-router-dom';
 
@@ -15,21 +14,11 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Home />
-                <h2>Register</h2>
-                <Register />
-                <h2>Create post</h2>
-                <Createpost />
-              </>
-            }
-          />
+          <Route path="/" element={<Home />}/>
           <Route path="/AllPost" element={<AllPost />} />
           <Route path="/PostDetail/:id" element={<PostDetails />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Editpost/:id" element={<Editpost />} />
         </Routes>
       </BrowserRouter>
     </>

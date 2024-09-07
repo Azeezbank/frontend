@@ -1,20 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import React from "react";
+import "./App.css";
+import Home from "./Components/Home";
+import AllPost from "./Components/AllPost";
+import PostDetails from "./Components/PostDetails";
+import Login from "./Components/Login";
+import Editpost from "./Components/Editpost";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import { BrowserRouter as Router, Route, Link, Routes, useParams } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function App() {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+                <Home />
+            }
+          />
+          <Route path="/AllPost" element={<AllPost />} />
+          <Route path="/PostDetail/:id" element={<PostDetails />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Editpost/:id" element={<Editpost />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default App;

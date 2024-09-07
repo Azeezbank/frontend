@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -5,6 +6,24 @@ import { Link } from "react-router-dom";
 function PostDetail() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+
+  const [name, setName] = useState(''); // To store name input
+  const [comment, setComment] = useState(''); // To store comment input
+  const [submittedData, setSubmittedData] = useState([]);
+
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('comments')) || [];
+    setSubmittedData(storedData);
+  }, []);
+
+useEffect(() => {
+    if (submittedData.length > 0) {
+      localStorage.setItem('comments', JSON.stringify(submittedData));
+    }
+  }, [submittedData]);
+  
+  
 
   useEffect(() => {
     fetch(`https://backend-i9tl.onrender.com/api/posts/${id}`)
@@ -17,17 +36,40 @@ function PostDetail() {
     return <h1 className="text-danger text-center pt-5"><div className="spinner-border"></div>Loading...</h1>;
   }
 
+
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the page from refreshing on form submission
+
+    if (name && comment) {
+      // Add the new comment to the list of submitted data
+      setSubmittedData([...submittedData, { name, comment }]);
+
+      // Clear input fields
+      setName('');
+      setComment('');
+    }
+  };
+
+
+  // Function to handle deleting a comment
+  const handleDelete = (index) => {
+    const updatedComments = submittedData.filter((_, i) => i !== index);
+    setSubmittedData(updatedComments);
+  };
+  
   return (
     <>
       <nav className="navbar navbar-expand-md bg-danger bg-gradient fixed-top">
         <div className="container-fluid">
-          <a
+          <span
             href="#"
             className="navbar-brand"
             style={{ fontSize: "2.2rem", fontWeight: "bold" }}
           >
             Bankky <small>Blog.</small>
-          </a>
+          </span>
           <button
             className="navbar-toggler bg-light bg-gradient"
             type=" button"
@@ -39,30 +81,43 @@ function PostDetail() {
           <div className="collapse navbar-collapse" id="navContent">
             <ul className="navbar-nav">
               <hr />
+              <Link to="/" className="link">
               <li className="nav-item">
-                <a href="." className="nav-link">
+                <span href="." className="nav-link">
                   HOME
-                </a>
+                </span>
               </li>
+            </Link>
+              <Link to='/' className="link">
               <li className="nav-item">
-                <a className="nav-link" href="#about">
-                  ABOUT ME
-                </a>
+                <span className="nav-link">
+                  <span>ABOUT Us</span>
+                </span>
               </li>
-              <Link to="/AllPost">
+                </Link>
+              <Link to="/AllPost" className="link">
                 <li className="nav-item">
-                  <a className="nav-link" href="#edu">
+                  <span className="nav-link">
                     BLOG
-                  </a>
+                  </span>
                 </li>{" "}
               </Link>
+              <Link to='/' className="link">
               <li className="nav-item">
-                <a className="nav-link" href="#service">
-                  SERVICE
-                </a>
+                <span className="nav-link">
+                 <span> SERVICE </span>
+                </span>
               </li>
+              </Link>
+              <Link to="/Login" className="link">
+              <li className="nav-item">
+              <span className="nav-link" href="">
+              My Account
+              </span>
+              </li>
+              </Link>
 
-              <button className="btn bg-primary bg-gradient text-light btn- rounded-pill">
+              <button className="btn bg-light text-dark btn- rounded-pill">
                 LET'S TALK
               </button>
             </ul>
@@ -85,15 +140,31 @@ function PostDetail() {
           <p className="pt-3">{post.content}</p>
         </div>
 
+
+
+        {/* Displaying the submitted data */}
+      <h3 className="text-danger mt-5 ms-5">Submitted Comments:</h3>
+      <ul>
+        {submittedData.map((entry, index) => (
+          <li className="border p-3 m-3 bg-white" style={{listStyle:'none'}} key={index}>
+            <strong>Name: {entry.name}:</strong> <p>Comment: {entry.comment}</p>
+            <button className="bg-danger text-white rounded border ms-3" onClick={() => handleDelete(index)}>Delete Comment</button>
+          </li>
+        ))}
+      </ul>
+
+
+        
+
         <div className="card car p-5 mt-5">
           <h6>Leave a Comment</h6>
           <p>Your email address will not be publish. The requied fields are marked *</p>
-          <form>
-            <textarea className="form-control mt-4 bg-light" rows={5} placeholder="Type here..."></textarea>
+          <form onSubmit={handleSubmit}>
+            <textarea className="form-control mt-4 bg-light" rows={5} value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Type here..."></textarea>
 
             <div className="row">
               <div className="col-sm-4">
-                <input className="form-control mt-4 bg-light" type="text" placeholder="Name*" required/>
+                <input className="form-control mt-4 bg-light" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name*" required/>
               </div>
               <div className="col-sm-4">
                 <input className="form-control mt-4 bg-light" type="email" placeholder="Email*" required/>
@@ -103,7 +174,7 @@ function PostDetail() {
               </div>
               </div>
               <div>
-              <button className="bg-danger border mt-5 p-3 text-white">Post Comment<i className="bi bi-chevron-double-right"></i></button>
+              <button type="submit" className="bg-danger border mt-5 p-3 text-white">Post Comment<i className="bi bi-chevron-double-right"></i></button>
             </div>
           </form>
         </div>

@@ -15,13 +15,13 @@ const Home = () => {
     <>
       <nav className="navbar navbar-expand-md bg-danger bg-gradient fixed-top">
         <div className="container-fluid">
-          <a
+          <span
             href="#"
             className="navbar-brand"
             style={{ fontSize: "2.2rem", fontWeight: "bold" }}
           >
             Bankky <small>Blog.</small>
-          </a>
+          </span>
           <button
             className="navbar-toggler bg-light bg-gradient"
             type=" button"
@@ -33,30 +33,42 @@ const Home = () => {
           <div className="collapse navbar-collapse" id="navContent">
             <ul className="navbar-nav">
               <hr />
-              <li className="nav-item">
-                <a href="." className="nav-link">
-                  HOME
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#About">
-                  ABOUT ME
-                </a>
-              </li>
-              <Link to="/AllPost">
+              <Link to="/" className="link">
                 <li className="nav-item">
-                  <a className="nav-link" href="#edu">
-                    BLOG
+                  <span href="." className="nav-link">
+                    HOME
+                  </span>
+                </li>
+              </Link>
+              <li className="nav-item">
+                <span className="nav-link">
+                  <a href="#About" className="link">
+                    ABOUT Us
                   </a>
+                </span>
+              </li>
+              <Link to="/AllPost" className="link">
+                <li className="nav-item">
+                  <span className="nav-link">BLOG</span>
                 </li>{" "}
               </Link>
               <li className="nav-item">
-                <a className="nav-link" href="#service">
-                  SERVICE
-                </a>
+                <span className="nav-link">
+                  <a href="#service" className="link">
+                    {" "}
+                    SERVICE{" "}
+                  </a>
+                </span>
               </li>
+              <Link to="/Login" className="link">
+                <li className="nav-item">
+                  <span className="nav-link" href="">
+                    My Account
+                  </span>
+                </li>
+              </Link>
 
-              <button className="btn bg-primary bg-gradient text-light btn- rounded-pill">
+              <button className="btn bg-light text-dark btn- rounded-pill">
                 LET'S TALK
               </button>
             </ul>
@@ -71,7 +83,7 @@ const Home = () => {
         <h6 className="best">Best Drinks and Delicacies By</h6>
         <h3 className="p-4">Bankky B</h3>
         <p className="paragraph">
-          Food not only satisfies our hunger but also brings people together, 
+          Food not only satisfies our hunger but also brings people together,
           creating shared experiences and memories. From the rich aroma of a
           freshly baked loaf to the vibrant colors of a fruit salad, each dish
           tells its own story.
@@ -89,255 +101,255 @@ const Home = () => {
 
       <div className="container-fluid bg-light p-5 text-center">
         <div className="car">
-        <h3>Recognized by</h3>
-        <div className="row mt-5 text-start">
-          <div className="col-6">
-            <div className="row ">
-              <div className="col-2">
-                <h4>
-                  <i className="bi bi-star-fill text-danger"></i>
-                </h4>
+          <h3>Recognized by</h3>
+          <div className="row mt-5 text-start">
+            <div className="col-6">
+              <div className="row ">
+                <div className="col-2">
+                  <h4>
+                    <i className="bi bi-star-fill text-danger"></i>
+                  </h4>
+                </div>
+                <div className="col-10">
+                  <h5> Michelin Guide</h5>
+                </div>
               </div>
-              <div className="col-10">
-                <h5> Michelin Guide</h5>
+            </div>
+            <div className="col-6">
+              <div className="row">
+                <div className="col-2">
+                  <h4>
+                    <i className="bi bi-award text-danger"></i>
+                  </h4>
+                </div>
+                <div className="col-10">
+                  <h5> Jame Beard foundation</h5>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-6">
-            <div className="row">
-              <div className="col-2">
-                <h4>
-                  <i className="bi bi-award text-danger"></i>
-                </h4>
-              </div>
-              <div className="col-10">
-                <h5> Jame Beard foundation</h5>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="row text-start mt-5">
-          <div className="col-6">
-            <div className="row">
-              <div className="col-2">
-                <h4>
-                  <i className="bi bi-chat-square-text text-danger"></i>
-                </h4>
+          <div className="row text-start mt-5">
+            <div className="col-6">
+              <div className="row">
+                <div className="col-2">
+                  <h4>
+                    <i className="bi bi-chat-square-text text-danger"></i>
+                  </h4>
+                </div>
+                <div className="col-10">
+                  <h5> Zagat</h5>
+                </div>
               </div>
-              <div className="col-10">
-                <h5> Zagat</h5>
+            </div>
+            <div className="col-6">
+              <div className="row">
+                <div className="col-2">
+                  <h4>
+                    <i className="bi bi-trophy text-danger"></i>
+                  </h4>
+                </div>
+                <div className="col-10">
+                  <h5> Slow food movement</h5>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-6">
-            <div className="row">
-              <div className="col-2">
-                <h4>
-                  <i className="bi bi-trophy text-danger"></i>
-                </h4>
-              </div>
-              <div className="col-10">
-                <h5> Slow food movement</h5>
-              </div>
+
+          <div className="row mt-5 text-light">
+            <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
+              <strong>OUR SERVICES</strong>
+              <h4>We Will Help Your Health Growing</h4>
+            </div>
+            <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
+              <h3>
+                <i className="bi bi-egg"></i>
+              </h3>
+              <h4>Recipe Development</h4>
+              <p>
+                Whether you're a home cook or a professional chef, our recipes
+                are designed to inspire and delight.
+              </p>
             </div>
           </div>
-        </div>
 
-        <div className="row mt-5 text-light">
-          <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
-            <strong>OUR SERVICES</strong>
-            <h4>We Will Help Your Health Growing</h4>
+          <div className="row mt-2 text-light">
+            <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
+              <h3>
+                <i className="bi bi-gear"></i>
+              </h3>
+              <h4>Cooking Tips & Techniques</h4>
+              <p>
+                Master the art of cooking with our comprehensive tips and
+                techniques. From kitchen hacks to advanced culinary skills
+              </p>
+            </div>
+            <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
+              <h3>
+                <i className="bi bi-clipboard"></i>
+              </h3>
+              <h4>Meal Planning & Prep</h4>
+              <p>
+                We offer easy-to-follow plans and pre-preparation tips to help
+                you save time and enjoy nutritious, well-balanced meals every
+                day of the week.
+              </p>
+            </div>
           </div>
-          <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
-            <h3>
-              <i className="bi bi-egg"></i>
-            </h3>
-            <h4>Recipe Development</h4>
-            <p>
-              Whether you're a home cook or a professional chef, our recipes are
-              designed to inspire and delight.
-            </p>
-          </div>
-        </div>
-
-        <div className="row mt-2 text-light">
-          <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
-            <h3>
-              <i className="bi bi-gear"></i>
-            </h3>
-            <h4>Cooking Tips & Techniques</h4>
-            <p>
-              Master the art of cooking with our comprehensive tips and
-              techniques. From kitchen hacks to advanced culinary skills
-            </p>
-          </div>
-          <div className="col-sm-6 bg-danger mt-2 p-5 rounded">
-            <h3>
-              <i className="bi bi-clipboard"></i>
-            </h3>
-            <h4>Meal Planning & Prep</h4>
-            <p>
-              We offer easy-to-follow plans and pre-preparation tips to help you
-              save time and enjoy nutritious, well-balanced meals every day of
-              the week.
-            </p>
-          </div>
-        </div>
         </div>
       </div>
 
       <div className="container-fluid bg-white p-5 text-center">
         <div className="car">
-        <div className="row mt-5 mb-3">
-          <div className="col-sm-4">
-            <h2>
-              <i className="bi bi-people bg-light p-3 rounded-circle"></i>
-            </h2>
-            <h4>About Our Company</h4>
+          <div className="row mt-5 mb-3">
+            <div className="col-sm-4">
+              <h2>
+                <i className="bi bi-people bg-light p-3 rounded-circle"></i>
+              </h2>
+              <h4 id="About">About Our Company</h4>
+            </div>
+            <div className="col-sm-8"></div>
           </div>
-          <div className="col-sm-8"></div>
-        </div>
-        <strong className="mt-5 text-start">
-          We are team of expert people with creativity ideas
-        </strong>
-        <p className="text-muted text-start pt-2">
-          We are passionate about all things food. Our mission is to inspire
-          culinary creativity and promote a healthy, balanced lifestyle through
-          delicious recipes, expert food photography, and insightful nutritional
-          advice.{" "}
-        </p>
+          <strong className="mt-5 text-start">
+            We are team of expert people with creativity ideas
+          </strong>
+          <p className="text-muted text-start pt-2">
+            We are passionate about all things food. Our mission is to inspire
+            culinary creativity and promote a healthy, balanced lifestyle
+            through delicious recipes, expert food photography, and insightful
+            nutritional advice.{" "}
+          </p>
 
-        <div className="row mt-4 text-start">
-          <div className="col-sm-1">
-            <h2>
-              <i className="bi bi-egg-fried bg-danger p-2 rounded-circle text-white"></i>
-            </h2>
+          
+          <div className="row mt-4 text-start">
+            <div className="col-sm-1">
+              <h2>
+                <i className="bi bi-egg-fried bg-danger p-2 rounded-circle text-white"></i>
+              </h2>
+            </div>
+            <div className="col-sm-5">
+              <h4>Recipe Development</h4>
+              <p className="text-muted">
+                Creating and testing new recipes, adjusting ingredients for
+                flavor, texture, and presentation.
+              </p>
+            </div>
+            <div className="col-sm-1">
+              <h2>
+                <i className="bi bi-camera bg-danger p-2 rounded-circle text-white"></i>
+              </h2>
+            </div>
+            <div className="col-sm-5">
+              <h4>Food photography</h4>
+              <p className="text-muted">
+                Capturing visually appealing images of food, showcasing dishes
+                in a way that enhances their appeal.
+              </p>
+            </div>
           </div>
-          <div className="col-sm-5">
-            <h4>Recipe Development</h4>
-            <p className="text-muted">
-              Creating and testing new recipes, adjusting ingredients for
-              flavor, texture, and presentation.
-            </p>
-          </div>
-          <div className="col-sm-1">
-            <h2>
-              <i className="bi bi-camera bg-danger p-2 rounded-circle text-white"></i>
-            </h2>
-          </div>
-          <div className="col-sm-5">
-            <h4>Food photography</h4>
-            <p className="text-muted">
-              Capturing visually appealing images of food, showcasing dishes in
-              a way that enhances their appeal.
-            </p>
-          </div>
-        </div>
 
-        <div className="row mt-4 text-start">
-          <div className="col-sm-1">
-            <h2>
-              <i className="bi bi-graph-up bg-danger rounded-circle p-2 text-white"></i>
-            </h2>
+          <div className="row mt-4 text-start">
+            <div className="col-sm-1">
+              <h2>
+                <i className="bi bi-graph-up bg-danger rounded-circle p-2 text-white"></i>
+              </h2>
+            </div>
+            <div className="col-sm-5">
+              <h4>Nutrition Analysis</h4>
+              <p className="text-muted">
+                Understanding and explaining the nutritional content of various
+                foods and how they contribute to a balanced diet
+              </p>
+            </div>
+            <div className="col-1">
+              <h2>
+                <i className="bi bi-tools bg-danger rounded-circle text-dark p-2 text-white"></i>
+              </h2>
+            </div>
+            <div className="col-sm-5">
+              <h4>Culinary Techniques</h4>
+              <p className="text-muted">
+                Mastery of cooking methods such as baking, grilling, sautéing,
+                and more, including tips and tricks for home cooks.
+              </p>
+            </div>
           </div>
-          <div className="col-sm-5">
-            <h4>Nutrition Analysis</h4>
-            <p className="text-muted">
-              Understanding and explaining the nutritional content of various
-              foods and how they contribute to a balanced diet
-            </p>
-          </div>
-          <div className="col-1">
-            <h2>
-              <i className="bi bi-tools bg-danger rounded-circle text-dark p-2 text-white"></i>
-            </h2>
-          </div>
-          <div className="col-sm-5">
-            <h4>Culinary Techniques</h4>
-            <p className="text-muted">
-              Mastery of cooking methods such as baking, grilling, sautéing, and
-              more, including tips and tricks for home cooks.
-            </p>
-          </div>
-        </div>
         </div>
       </div>
 
       <div className="container-fluid bg-light p-5 text-center">
         <div className="car">
-        <div className="row mt-5 mb-3">
-          <div className="col-sm-4 text-start ms-4 mb-3">
-            <h1>
-              <i className="bi bi-signpost bg-danger p-4 rounded-circle text-white"></i>
-            </h1>
+          <div className="row mt-5 mb-3">
+            <div className="col-sm-4 text-start ms-4 mb-3">
+              <h1>
+                <i className="bi bi-signpost bg-danger p-4 rounded-circle text-white"></i>
+              </h1>
+            </div>
+            <div className="col-sm-8"></div>
           </div>
-          <div className="col-sm-8"></div>
-        </div>
 
-        <div className="row mt-3 text-start">
-          <div className="col-sm-6">
-            <h4>Our business process road</h4>
+          <div className="row mt-3 text-start">
+            <div className="col-sm-6">
+              <h4>Our business process road</h4>
+            </div>
+            <div className="col-sm-6"></div>
           </div>
-          <div className="col-sm-6"></div>
-        </div>
 
-        <div className="row mt-5">
-          <div className="col-sm-4 text-danger">
-            <h1>01.</h1>
+          <div className="row mt-5">
+            <div className="col-sm-4 text-danger">
+              <h1>01.</h1>
+            </div>
+            <div className="col-sm-8 text-start">
+              <h5>Create an idea</h5>
+              <p className="text-muted">
+                What’s hard is to develop the habits that enable us to come up
+                with great ideas.
+              </p>
+            </div>
           </div>
-          <div className="col-sm-8 text-start">
-            <h5>Create an idea</h5>
+
+          <div className="row mt-3">
+            <div className="col-sm-4 text-danger">
+              <h1>02.</h1>
+            </div>
+            <div className="col-sm-8 text-start">
+              <h5>Complete the project</h5>
+              <p className="text-muted">
+                You can organize yourself and your team in endless ways.
+              </p>
+            </div>
+          </div>
+
+          <div className="row mt-3">
+            <div className="col-sm-4 text-danger">
+              <h1>03.</h1>
+            </div>
+            <div className="col-sm-8 text-start">
+              <h5>Execution</h5>
+              <p className="text-muted">
+                When it comes to motivating teams, awarding members for good
+                performance.
+              </p>
+            </div>
+          </div>
+
+          <div className="card mt-5 mb-3 p-5">
+            <h3>
+              <span className="text-danger">Ready?</span> Embark on your
+              culinary journey
+            </h3>
             <p className="text-muted">
-              What’s hard is to develop the habits that enable us to come up
-              with great ideas.
+              Whether you're launching a new food venture or enhancing your
+              existing one, we're here to help you start strong and bring your
+              vision to life with delicious results.
             </p>
+            <h2 className="btn bg-danger shadow-lg pt-3 pb-3 rounded text-white">
+              <i className="bi bi-telephone"></i> Contact Us Today
+            </h2>
           </div>
-        </div>
-
-        <div className="row mt-3">
-          <div className="col-sm-4 text-danger">
-            <h1>02.</h1>
-          </div>
-          <div className="col-sm-8 text-start">
-            <h5>Complete the project</h5>
-            <p className="text-muted">
-              You can organize yourself and your team in endless ways.
-            </p>
-          </div>
-        </div>
-
-        <div className="row mt-3">
-          <div className="col-sm-4 text-danger">
-            <h1>03.</h1>
-          </div>
-          <div className="col-sm-8 text-start">
-            <h5>Execution</h5>
-            <p className="text-muted">
-              When it comes to motivating teams, awarding members for good
-              performance.
-            </p>
-          </div>
-        </div>
-
-        <div className="card mt-5 mb-3 p-5">
-          <h3>
-            <span className="text-danger">Ready?</span> Embark on your culinary
-            journey
-          </h3>
-          <p className="text-muted">
-            Whether you're launching a new food venture or enhancing your
-            existing one, we're here to help you start strong and bring your
-            vision to life with delicious results.
-          </p>
-          <h2 className="btn bg-danger shadow-lg pt-3 pb-3 rounded text-white">
-            <i className="bi bi-telephone"></i> Contact Us Today
-          </h2>
-        </div>
         </div>
       </div>
 
-      
       <div className="container-fluid bg-danger p-5 pt-3 text-center text-white">
         <div className="row mt-5 mb-5">
           <div className="col-sm-4">
@@ -383,16 +395,19 @@ const Home = () => {
             </div>
           </div>
           <div className="col-sm-8">
-
             <div className="row">
               <div className="col-sm-8 pt-5">
                 <h3>Join Our Community of 203,849 Food Lovers</h3>
-                <p>Experience the joy of culinary exploration, where each recipe, reviews
-                  and tip nourishes the soul just like a melody ot a masterpiece. Let our content inspire
-                  your next meal.
+                <p>
+                  Experience the joy of culinary exploration, where each recipe,
+                  reviews and tip nourishes the soul just like a melody ot a
+                  masterpiece. Let our content inspire your next meal.
                 </p>
                 <h3>Stay Connected</h3>
-                <p>I share delicious and thoughtfully curated content occasionally-no spam, just the good stuff. Promise.</p>
+                <p>
+                  I share delicious and thoughtfully curated content
+                  occasionally-no spam, just the good stuff. Promise.
+                </p>
               </div>
               <div className="col-sm-4 pt-5">
                 <h3>ADDRESS</h3>
@@ -404,7 +419,10 @@ const Home = () => {
       </div>
 
       <div className="container-fluid border-top border-light bg-danger text-center text-light p-5">
-      <p>Copyright 2024 Bankky Blogger || Alright Reserve <br/> Subscribe for newsletter</p>
+        <p>
+          Copyright 2024 Bankky Blogger || Alright Reserve <br /> Subscribe for
+          newsletter
+        </p>
       </div>
     </>
   );
